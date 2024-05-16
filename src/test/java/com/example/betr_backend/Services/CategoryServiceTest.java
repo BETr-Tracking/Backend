@@ -180,36 +180,36 @@ class CategoryServiceTest {
         verify(categoryRepo, times(1)).save(any(Category.class));
     }
     @Test
-    void testDeleteCategory() {
-        // Mocking category id
-        long categoryId = 1L;
+    public void testDeleteCategory_CategoryExists() {
+        long cid = 1L;
+        Category category = new Category(); // Create a sample Category object
 
-        // Mocking category
-        Category category = new Category();
-        // Create a mock User object
-        User user = new User();
-        user.setUserId(1L); // Set the user ID
-        // Set the user in the category
-        category.setUser(user);
+        // Mock the behavior of fetchCategory
+        when(categoryService.fetchCategory(cid)).thenReturn(category);
 
-        // Mocking MonthYearModel
-        MonthYearModel monthYearModel = new MonthYearModel();
-        monthYearModel.setMonth(5);
-        monthYearModel.setYear(2024);
+        // Call the deleteCategory method
+        categoryService.deleteCategory(cid);
 
-        // Mocking fetchCategory
-        when(categoryService.fetchCategory(categoryId)).thenReturn(category);
+        // Verify that makeCategoryMiscWhenDeleted, deleteUserCategories, and deleteCategory were called
+        verify(expenseService).makeCategoryMiscWhenDeleted(cid);
+        verify(budgetCategoryService).deleteUserCategories(cid);
+        verify(categoryRepo).deleteCategory(cid);
+    }
 
-        // Performing the test
-        categoryService.deleteCategory(categoryId, monthYearModel);
+    @Test
+    public void testDeleteCategory_CategoryDoesNotExist() {
+        long cid = 1L;
 
-        // Verify interactions
-        verify(expenseService, times(1)).makeCategoryMiscWhenDeleted(categoryId);
-        // You need to ensure that the user is not null before invoking getUserId()
-        assertNotNull(category.getUser());
-        verify(budgetService, times(1)).getBudgetId(category.getUser().getUserId(), 5, 2024);
-        verify(budgetCategoryService, times(1)).deleteUserCategories(anyLong(), anyLong());
-        verify(categoryRepo, times(1)).deleteCategory(categoryId);
+        // Mock the behavior of fetchCategory to return null
+        when(categoryService.fetchCategory(cid)).thenReturn(null);
+
+        // Call the deleteCategory method
+        categoryService.deleteCategory(cid);
+
+        // Verify that makeCategoryMiscWhenDeleted, deleteUserCategories, and deleteCategory were NOT called
+        verify(expenseService, never()).makeCategoryMiscWhenDeleted(cid);
+        verify(budgetCategoryService, never()).deleteUserCategories(cid);
+        verify(categoryRepo, never()).deleteCategory(cid);
     }
 
     @Test

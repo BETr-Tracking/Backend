@@ -47,6 +47,6 @@ public interface BudgetCategoryRepo extends JpaRepository<BudgetCategory, Intege
     void deleteUserBudgets(@Param("bid") long bid);
     @Transactional
     @Modifying
-    @Query("DELETE FROM BudgetCategory bc where bc.category.categoryId=:cid AND bc.budget.budgetId=:bid")
-    void deleteUserCategories(@Param("bid") long bid, @Param("cid") long cid);
+    @Query("DELETE FROM BudgetCategory bc where bc.category.categoryId=:cid")
+    void deleteUserCategories(@Param("cid") long cid);
 }

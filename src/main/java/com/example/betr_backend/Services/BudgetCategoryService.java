@@ -60,7 +60,7 @@ public class BudgetCategoryService {
     public void updateSpentAmount(long uid, long bid, long cid, long amount) { bcr.updateSpentAmount(uid, bid, cid, amount); }
     public void changeSpentAmount(long uid, long bid, long cid, long old, long amount) { bcr.changeSpentAmount(uid, bid, cid, old, amount); }
     public void reduceSpentAmount(long uid, long bid, long cid, long amount) { bcr.reduceSpentAmount(uid, bid, cid, amount); }
-    public void deleteUserCategories(long bid, long cid) { bcr.deleteUserCategories(bid, cid);}
+    public void deleteUserCategories(long cid) { bcr.deleteUserCategories(cid);}
     public void deleteUserBudgetsAndCategories(long uid){
         bcr.deleteUserBudgetsAndCategories(uid);
     }

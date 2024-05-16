@@ -58,9 +58,9 @@ public class CategoryCtrller {
         }
     }
     @DeleteMapping("/deleteCategory/{cid}")
-    public ResponseEntity<String> deleteCategory(@PathVariable long cid, @RequestBody MonthYearModel mym) {
+    public ResponseEntity<String> deleteCategory(@PathVariable long cid) {
         try {
-            cs.deleteCategory(cid, mym);
+            cs.deleteCategory(cid);
             return ResponseEntity.ok("Record with ID " + cid + " deleted successfully.");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error deleting record with ID " + cid + ": " + e.getMessage());

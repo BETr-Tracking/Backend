@@ -55,13 +55,14 @@ public class CategoryService {
         return cr.save(category);
     }
     @Transactional
-    public void deleteCategory(long cid, MonthYearModel mym){
+    public void deleteCategory(long cid){
         Category cat = fetchCategory(cid);
-        long bid = bs.getBudgetId(cat.getUser().getUserId(), mym.getMonth(), mym.getYear());
-        es.makeCategoryMiscWhenDeleted(cid);
+        if (cat != null){
+            es.makeCategoryMiscWhenDeleted(cid);
 //        es.deleteCategoryExpenses(cid);
-        bcs.deleteUserCategories(bid, cid);
-        cr.deleteCategory(cid);
+            bcs.deleteUserCategories(cid);
+            cr.deleteCategory(cid);
+        }
     }
     public void deleteAllCategories(long uid){
         cr.deleteAllCategories(uid);

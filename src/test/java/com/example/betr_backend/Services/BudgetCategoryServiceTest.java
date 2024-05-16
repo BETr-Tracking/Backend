@@ -158,11 +158,11 @@ public class BudgetCategoryServiceTest {
 
     @Test
     void testDeleteUserCategories() {
-        doNothing().when(bcr).deleteUserCategories(1L, 1L);
+        doNothing().when(bcr).deleteUserCategories(1L);
 
-        bcs.deleteUserCategories(1L, 1L);
+        bcs.deleteUserCategories(1L);
 
-        verify(bcr).deleteUserCategories(1L, 1L);
+        verify(bcr).deleteUserCategories(1L);
     }
 
     @Test
