@@ -10,7 +10,7 @@ pipeline {
         stage('1. Git Clone') {
             steps {
                 script { 
-                    git branch: 'main', url: "https://github.com//BETr-Tracking/BETr.git"
+                    git branch: 'main', url: "https://github.com//BETr-Tracking/Backend.git"
                 }
             }
         }

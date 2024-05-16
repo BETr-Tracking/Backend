@@ -1,0 +1,30 @@
+---
+- name: Deploy Docker Compose stack
+  hosts: all
+  become: false
+
+  tasks:
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Pull Backend Image
+      docker_image:
+        name: svp3012/betr-backend
+        source: pull
+
+    - name: Pull Frontend Image
+      docker_image:
+        name: svp3012/betr-frontend
+        source: pull
+
+    - name: Copy Docker Compose file to host
+      copy:
+        src: /var/lib/jenkins/workspace/BETr/docker-compose.yml
+        dest: /opt/docker-compose.yml
+
+    - name: Start Docker Compose stack
+      command: docker-compose up -d
+      args:
+        chdir: /opt/

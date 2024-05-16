@@ -12,5 +12,5 @@
 # CMD sed -i 's/\r$//' /app/calculator.sh
 
 FROM openjdk
-COPY ./target/betr_backend-0.0.1-SNAPSHOT.jar ./
-CMD ["java", "-jar", "betr_backend-0.0.1-SNAPSHOT.jar"]
+COPY ./target/BetrBackend-0.0.1-SNAPSHOT.jar ./
+CMD ["java", "-jar", "BetrBackend-0.0.1-SNAPSHOT.jar"]
