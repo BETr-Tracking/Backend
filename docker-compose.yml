@@ -36,8 +36,8 @@ services:
       mydb:
         condition: service_healthy
   betr-frontend:
-    image: svp3012/betr-frontend
-    container_name: betr-frontend
+    image: svp3012/betr-frontend-app
+    container_name: betr-frontend-app
     stdin_open: true
     ports:
       - "3000:3000"
