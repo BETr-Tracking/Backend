@@ -76,7 +76,7 @@ pipeline {
             }
     }
     options {
-        buildDiscarder(logRotator(numToKeepStr: '5')) // Keep the last 5 build logs
+        buildDiscarder(logRotator(numToKeepStr: '5'))
     }
 
 }
