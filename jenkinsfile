@@ -133,14 +133,17 @@ pipeline {
         }
         stage('4. Run Ansible Playbook') {
             steps {
-                ansiblePlaybook becomeUser: null,
-                colorized: true, 
-                credentialsId: 'localhost', 
-                disableHostKeyChecking: true, 
-                inventory: 'Devops/inventory', 
-                playbook: 'Devops/deploy.yml', 
-                vaultTmpPath: '',
-                sudoUser: null
+                dir('./Backend'){
+                    ansiblePlaybook becomeUser: null,
+                    colorized: true, 
+                    credentialsId: 'localhost', 
+                    disableHostKeyChecking: true, 
+                    inventory: 'inventory', 
+                    playbook: 'deploy.yml', 
+                    vaultTmpPath: '',
+                    sudoUser: null
+                }
+                
             }
         }
     }
