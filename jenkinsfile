@@ -1,95 +1,3 @@
-// pipeline {
-
-//     environment {
-//         docker_image = ""
-//         DOCKERHUB_CREDENTIALS=credentials('DockerHubCred')
-//     } 
-//     agent any
-
-//     stages {
-//         stage('1. Git Clone - Backend') {
-//             steps {
-//                 script { 
-//                     git branch: 'main', url: "https://github.com/BETr-Tracking/Backend.git"
-//                 }
-//             }
-//         }
-//         stage('2. Maven Build') {
-//             steps {
-//                     sh 'mvn clean install'
-//             }
-//         }
-        
-
-//         stage('3. Build Docker Image') {
-//             steps {
-//                 script{
-//                         sh 'docker build -t svp3012/betr-backend .'
-//                 }
-                
-//             }
-//         }
-//         stage('4. Dockerhub Login') {
-//             steps {
-// 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-// 			}
-// 		}
-//         stage('5. Push Docker Image') {
-//             steps {
-//                 script{
-//                     sh 'docker push svp3012/betr-backend'
-//                 }
-//             }
-//         }
-//         stage('6. Git Clone - Frontend') {
-//             steps {
-//                 script { 
-//                     git branch: 'main', url: "https://github.com/BETr-Tracking/Frontend.git"
-//                 }
-//             }
-//         }
-//         stage('7. Build Docker Image') {
-//             steps {
-//                 script{
-                        
-//                     sh 'docker build --build-arg REACT_APP_API_URL=https://api.example.com --build-arg REACT_APP_DEBUG=true -t svp3012/betr-frontend-app .'
-//                 }
-                
-//             }
-//         }
-//         stage('8. Dockerhub Login') {
-//             steps {
-// 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-// 			}
-// 		}
-//         stage('9. Push Docker Image') {
-//             steps {
-//                 script{
-//                     sh 'docker push svp3012/betr-frontend-app'
-//                 }
-//             }
-//         }
-//        stage('10. Run Ansible Playbook') {
-//             steps {
-//                 ansiblePlaybook becomeUser: null,
-//                 colorized: true, 
-//                 credentialsId: 'localhost', 
-//                 disableHostKeyChecking: true, 
-//                 inventory: 'Devops/inventory', 
-//                 playbook: 'Devops/deploy.yml', 
-//                 vaultTmpPath: '',
-//                 sudoUser: null
-//             }
-//         }
-
-//     }
-//     post {
-// 		always {
-// 			sh 'docker logout'
-// 		}
-// 	}
-// }
-
 pipeline {
     environment {
         docker_image = ""
@@ -101,7 +9,6 @@ pipeline {
         stage('1. Git Clone') {
             steps {
                 script {
-                    // Clone both Backend and Frontend repositories
                     git branch: 'main', url: "https://github.com/BETr-Tracking/Backend.git"
                     dir('Frontend') {
                         git branch: 'main', url: "https://github.com/BETr-Tracking/Frontend.git"
@@ -111,19 +18,15 @@ pipeline {
         }
         stage('2. Maven Build') {
             steps {
-                // Maven build for Backend
                 sh 'mvn clean install'
             }
         }
         stage('3. Build and Push Docker Images') {
             steps {
                 script {
-                    // Build and push Backend Docker image
                     sh 'docker build -t svp3012/betr-backend .'
                     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     sh 'docker push svp3012/betr-backend'
-
-                    // Build and push Frontend Docker image
                     dir('Frontend') {
                         sh 'docker build --build-arg REACT_APP_API_URL=https://api.example.com --build-arg REACT_APP_DEBUG=true -t svp3012/betr-frontend-app .'
                         sh 'docker push svp3012/betr-frontend-app'
@@ -156,14 +59,6 @@ pipeline {
             steps {
                 script {
                     dir(''){
-                    // ansiblePlaybook becomeUser: null,
-                    // colorized: true, 
-                    // credentialsId: 'localhost', 
-                    // disableHostKeyChecking: true, 
-                    // inventory: 'inventory', 
-                    // playbook: 'deploy.yml', 
-                    // vaultTmpPath: '',
-                    // sudoUser: null
                         sh '''
                                 export LANG=en_US.UTF-8
                                 export LANGUAGE=en_US:en
@@ -180,6 +75,10 @@ pipeline {
                 sh 'docker logout'
             }
     }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5')) // Keep the last 5 build logs
+    }
+
 }
 
 
