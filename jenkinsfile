@@ -26,9 +26,9 @@ pipeline {
                 script{
                         sh 'docker build -t svp3012/betr-backend .'
                 
-                        dir('./Frontend') {
-                            sh 'docker build --build-arg REACT_APP_API_URL=https://api.example.com --build-arg REACT_APP_DEBUG=true -t svp3012/betr-frontend-app .'
-                        }
+                        // dir('/var/lib/jenkins/workspace/BETr/Frontend') {
+                        //     sh 'docker build --build-arg REACT_APP_API_URL=https://api.example.com --build-arg REACT_APP_DEBUG=true -t svp3012/betr-frontend-app .'
+                        // }
                 }
                 
             }
