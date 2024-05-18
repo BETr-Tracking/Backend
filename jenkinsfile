@@ -10,7 +10,7 @@ pipeline {
         stage('1. Git Clone') {
             steps {
                 script { 
-                    git branch: 'main', url: "https://github.com//BETr-Tracking/Backend.git"
+                    git branch: 'main', url: "https://github.com//BETr-Tracking.git"
                 }
             }
         }
@@ -23,11 +23,11 @@ pipeline {
 
         stage('3. Build Docker Image') {
             steps {
-                dir('./Backend') {
+                {
                     sh 'docker build -t svp3012/betr-backend .'
                 }
                 dir('./Frontend') {
-                    sh 'docker build -t svp3012/betr-frontend .'
+                    sh 'docker build --build-arg REACT_APP_API_URL=https://api.example.com --build-arg REACT_APP_DEBUG=true -t svp3012/betr-frontend-app .'
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script{
                     sh 'docker push svp3012/betr-backend'
-                    sh 'docker push svp3012/betr-frontend'
+                    sh 'docker push svp3012/betr-frontend-app'
                 }
             }
         }
