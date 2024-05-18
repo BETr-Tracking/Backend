@@ -133,7 +133,7 @@ pipeline {
         }
         stage('4. Run Ansible Playbook') {
             steps {
-                dir('./Backend'){
+                
                     ansiblePlaybook becomeUser: null,
                     colorized: true, 
                     credentialsId: 'localhost', 
@@ -142,7 +142,7 @@ pipeline {
                     playbook: 'deploy.yml', 
                     vaultTmpPath: '',
                     sudoUser: null
-                }
+                
                 
             }
         }
