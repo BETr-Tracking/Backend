@@ -131,7 +131,28 @@ pipeline {
                 }
             }
         }
-        stage('4. Run Ansible Playbook') {
+        stage('4. Cleanup Docker Images') {
+            steps {
+                script {
+                    sh '''
+                        # Stop any running containers of our project
+                        docker ps -q --filter "ancestor=svp3012/betr-backend" | xargs -r docker stop
+                        docker ps -q --filter "ancestor=svp3012/betr-frontend-app" | xargs -r docker stop
+
+                        # Remove all stopped containers
+                        docker container prune -f
+
+                        # Remove images matching the project name, excluding the ones with tags
+                        docker images -q svp3012/betr-backend | xargs -r docker rmi -f
+                        docker images -q svp3012/betr-frontend-app | xargs -r docker rmi -f
+
+                        # Remove dangling images
+                        docker images -f "dangling=true" -q | xargs -r docker rmi
+                    '''
+                }
+            }
+        }
+        stage('5. Run Ansible Playbook') {
             steps {
                 script {
                     dir(''){
