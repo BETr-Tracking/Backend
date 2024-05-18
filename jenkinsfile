@@ -143,7 +143,12 @@ pipeline {
                     // playbook: 'deploy.yml', 
                     // vaultTmpPath: '',
                     // sudoUser: null
-                    sh 'ansible-playbook -i inventory deploy.yml'
+                        sh '''
+                                export LANG=en_US.UTF-8
+                                export LANGUAGE=en_US:en
+                                export LC_ALL=en_US.UTF-8
+                                ansible-playbook -i inventory deploy.yml
+                            '''
                     }
                 }
             }
