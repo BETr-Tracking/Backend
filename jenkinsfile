@@ -7,7 +7,7 @@ pipeline {
     agent any
 
     stages {
-        stage('1. Git Clone') {
+        stage('1. Git Clone - Backend') {
             steps {
                 script { 
                     git branch: 'main', url: "https://github.com/BETr-Tracking/Backend.git"
@@ -25,29 +25,45 @@ pipeline {
             steps {
                 script{
                         sh 'docker build -t svp3012/betr-backend .'
-                
-                        // dir('/var/lib/jenkins/workspace/BETr/Frontend') {
-                        //     sh 'docker build --build-arg REACT_APP_API_URL=https://api.example.com --build-arg REACT_APP_DEBUG=true -t svp3012/betr-frontend-app .'
-                        // }
                 }
                 
             }
         }
-        stage('4. Dockerhub Login') {
+        stage('4. Push Docker Image') {
+            steps {
+                script{
+                    sh 'docker push svp3012/betr-backend'
+                }
+            }
+        }
+        stage('5. Git Clone - Frontend') {
+            steps {
+                script { 
+                    git branch: 'main', url: "https://github.com/BETr-Tracking/Frontend.git"
+                }
+            }
+        }
+        stage('6. Build Docker Image') {
+            steps {
+                script{
+                        
+                    sh 'docker build --build-arg REACT_APP_API_URL=https://api.example.com --build-arg REACT_APP_DEBUG=true -t svp3012/betr-frontend-app .'
+                }
+                
+            }
+        }
+        stage('7. Dockerhub Login') {
             steps {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
-
-        stage('5. Push Docker Images') {
+        stage('8. Push Docker Image') {
             steps {
                 script{
-                    sh 'docker push svp3012/betr-backend'
                     sh 'docker push svp3012/betr-frontend-app'
                 }
             }
         }
-
        stage('6. Run Ansible Playbook') {
             steps {
                 ansiblePlaybook becomeUser: null,
