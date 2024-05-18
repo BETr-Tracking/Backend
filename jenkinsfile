@@ -133,7 +133,7 @@ pipeline {
         }
         stage('4. Run Ansible Playbook') {
             steps {
-                dir('Backend'){
+                dir('BETr'){
                     ansiblePlaybook becomeUser: null,
                     colorized: true, 
                     credentialsId: 'localhost', 
