@@ -29,21 +29,26 @@ pipeline {
                 
             }
         }
-        stage('4. Push Docker Image') {
+        stage('4. Dockerhub Login') {
+            steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+        stage('5. Push Docker Image') {
             steps {
                 script{
                     sh 'docker push svp3012/betr-backend'
                 }
             }
         }
-        stage('5. Git Clone - Frontend') {
+        stage('6. Git Clone - Frontend') {
             steps {
                 script { 
                     git branch: 'main', url: "https://github.com/BETr-Tracking/Frontend.git"
                 }
             }
         }
-        stage('6. Build Docker Image') {
+        stage('7. Build Docker Image') {
             steps {
                 script{
                         
@@ -52,19 +57,19 @@ pipeline {
                 
             }
         }
-        stage('7. Dockerhub Login') {
+        stage('8. Dockerhub Login') {
             steps {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
-        stage('8. Push Docker Image') {
+        stage('9. Push Docker Image') {
             steps {
                 script{
                     sh 'docker push svp3012/betr-frontend-app'
                 }
             }
         }
-       stage('6. Run Ansible Playbook') {
+       stage('10. Run Ansible Playbook') {
             steps {
                 ansiblePlaybook becomeUser: null,
                 colorized: true, 
