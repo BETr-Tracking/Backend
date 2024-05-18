@@ -17,7 +17,7 @@ public class BudgetCtrller {
     @Autowired
     private BudgetService bs;
     @Autowired
-    private BudgetCategoryService bcs;
+    private BudgetCategoryService bcs; 
 
     @GetMapping("/getBudget/{bid}")
     public ResponseEntity<Map<String, Object>> getBudgetWithCategories(@PathVariable long bid) {
