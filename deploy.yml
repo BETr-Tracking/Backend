@@ -35,7 +35,7 @@
         image: svp3012/betr-backend
         state: started
         ports:
-          - "8080:8080"  # Adjust the ports as necessary
+          - "1306:1306"  # Adjust the ports as necessary
 
     - name: Run Frontend Container
       docker_container:
@@ -43,7 +43,7 @@
         image: svp3012/betr-frontend-app
         state: started
         ports:
-          - "3000:80"  # Adjust the ports as necessary
+          - "80:80"  # Adjust the ports as necessary
         env:
           REACT_APP_API_URL: "https://api.example.com"
           REACT_APP_DEBUG: "true"
