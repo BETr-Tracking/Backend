@@ -12,7 +12,7 @@
     - name: Pull Backend Image
       docker_image:
         name: svp3012/betr-backend
-        source: pull
+        source: pull 
 
     - name: Pull Frontend Image
       docker_image:
