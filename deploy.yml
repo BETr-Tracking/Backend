@@ -1,52 +1,3 @@
-# ---
-# - name: Deploy Docker Compose stack
-#   hosts: all
-#   become: false
-
-#   tasks:
-#     - name: Install Docker Compose
-#       apt:
-#         name: docker-compose
-#         state: present
-
-#     - name: Pull Backend Image
-#       docker_image:
-#         name: svp3012/betr-backend
-#         source: pull
-
-#     - name: Pull Frontend Image
-#       docker_image:
-#         name: svp3012/betr-frontend-app
-#         source: pull
-
-#     - name: Copy Docker Compose file to host
-#       copy:
-#         src: /var/lib/jenkins/workspace/BETr/docker-compose.yml
-#         dest: /opt/docker-compose.yml
-
-#     - name: Start Docker Compose stack
-#       command: docker-compose up -d
-#       args:
-#         chdir: /opt/
-
-#     - name: Run Backend Container
-#       docker_container:
-#         name: betr-backend
-#         image: svp3012/betr-backend
-#         state: started
-#         ports:
-#           - "1306:1306"  
-
-#     - name: Run Frontend Container
-#       docker_container:
-#         name: betr-frontend-app
-#         image: svp3012/betr-frontend-app
-#         state: started
-#         ports:
-#           - "80:80"  
-#         env:
-#           REACT_APP_API_URL: "https://api.example.com"
-#           REACT_APP_DEBUG: "true"
 ---
 - name: Deploy Docker Compose stack
   hosts: all
@@ -61,12 +12,12 @@
     - name: Pull Backend Image
       docker_image:
         name: svp3012/betr-backend
-        source: pull 
+        source: pull
 
     - name: Pull Frontend Image
       docker_image:
         name: svp3012/betr-frontend-app
-        source: pull 
+        source: pull
 
     - name: Copy Docker Compose file to host
       copy:
@@ -84,18 +35,7 @@
         image: svp3012/betr-backend
         state: started
         ports:
-          - "1306:1306"
-        env:
-          server.port: "1306"
-          spring.datasource.url: "jdbc:mysql://localhost:3306/betr?createDatabaseIfNotExist=true"
-          spring.datasource.username: "svp"
-          spring.datasource.password: "Taehyungieoppa@3012"
-          spring.datasource.driver-class-name: "com.mysql.cj.jdbc.Driver"
-          spring.jpa.hibernate.ddl-auto: "update"
-          spring.jpa.show-sql: "true"
-          spring.main.allow-circular-references: "true"
-          logging.file.name: "appLog.log"
-          logging.pattern.file: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+          - "5000:5000"  
 
     - name: Run Frontend Container
       docker_container:
@@ -103,8 +43,7 @@
         image: svp3012/betr-frontend-app
         state: started
         ports:
-          - "80:80"
+          - "3000:3000"  
         env:
-          REACT_APP_API_URL: "http://localhost:1306"
+          REACT_APP_API_URL: "https://api.example.com"
           REACT_APP_DEBUG: "true"
-
