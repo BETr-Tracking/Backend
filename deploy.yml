@@ -17,7 +17,7 @@
     - name: Pull Frontend Image
       docker_image:
         name: svp3012/betr-frontend-app
-        source: pull
+        source: pull 
 
     - name: Copy Docker Compose file to host
       copy:
