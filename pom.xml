@@ -101,7 +101,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-maven-plugin</artifactId>
 			<configuration>
-				<mainClass>com.example.BetrBackendApplication</mainClass>
+				<mainClass>com.example.betr_backend.BetrBackendApplication</mainClass>
 			</configuration>
 		</plugin>
 		<plugin>
