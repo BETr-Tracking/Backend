@@ -27,7 +27,7 @@ services:
     ports:
       - "8081:8081"
     environment:
-      MYSQL_URL: jdbc:mysql://mydb:3307/betr?createDatabaseIfNotExist=true
+      MYSQL_URL: jdbc:mysql://database-container:3307/betr?createDatabaseIfNotExist=true
       MYSQL_USERNAME: svp
       MYSQL_PASSWORD: Taehyungieoppa@3012
     volumes:
