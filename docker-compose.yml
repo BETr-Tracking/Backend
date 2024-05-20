@@ -23,7 +23,7 @@ services:
     image: svp3012/betr-backend
     container_name: betr-backend
     ports:
-      - "5000:5000"
+      - "8081:8081"
     environment:
       MYSQL_URL: jdbc:mysql://localhost:3306/betr?createDatabaseIfNotExist=true
       MYSQL_USERNAME: svp
@@ -40,7 +40,7 @@ services:
     container_name: betr-frontend-app
     stdin_open: true
     ports:
-      - "3000:3000"
+      - "80:80"
     networks:
       - betr-network
     depends_on:

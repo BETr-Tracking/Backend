@@ -14,3 +14,4 @@
 FROM openjdk
 COPY ./target/BetrBackend-0.0.1-SNAPSHOT.jar ./
 CMD ["java", "-jar", "BetrBackend-0.0.1-SNAPSHOT.jar"] 
+
