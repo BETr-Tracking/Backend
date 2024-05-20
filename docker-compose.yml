@@ -15,7 +15,7 @@ services:
       MYSQL_ROOT_PASSWORD: 3012
       MYSQL_DATABASE: betr
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - database-volume:/var/lib/mysql
     networks:
