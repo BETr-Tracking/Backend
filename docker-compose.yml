@@ -15,7 +15,7 @@ services:
       MYSQL_ROOT_PASSWORD: 3012
       MYSQL_DATABASE: betr
     ports:
-      - "3306:3306"
+      - "3307:3307"
     volumes:
       - database-volume:/var/lib/mysql
     networks:
@@ -26,7 +26,7 @@ services:
     ports:
       - "8081:8081"
     environment:
-      MYSQL_URL: jdbc:mysql://localhost:3306/betr?createDatabaseIfNotExist=true
+      MYSQL_URL: jdbc:mysql://localhost:3307/betr?createDatabaseIfNotExist=true
       MYSQL_USERNAME: svp
       MYSQL_PASSWORD: Taehyungieoppa@3012
     volumes:
