@@ -41,7 +41,7 @@ services:
     container_name: betr-frontend-app
     stdin_open: true
     ports:
-      - "80:80"
+      - "5000:5000"
     networks:
       - betr-network
     depends_on:

@@ -43,7 +43,7 @@
         image: svp3012/betr-frontend-app
         state: started
         ports:
-          - "80:80"  
+          - "5000:5000"  
         env:
           REACT_APP_API_URL: "https://api.example.com"
           REACT_APP_DEBUG: "true"
