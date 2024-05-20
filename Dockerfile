@@ -25,7 +25,7 @@ WORKDIR /app
 COPY target/BetrBackend-0.0.1-SNAPSHOT.jar /app/BetrBackend-0.0.1-SNAPSHOT.jar
 
 # Expose port 1306
-EXPOSE 1306
+EXPOSE 8081
 
 # Set the entry point to run the JAR file
 ENTRYPOINT ["java", "-jar", "BetrBackend-0.0.1-SNAPSHOT.jar"]
