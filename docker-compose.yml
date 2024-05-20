@@ -12,8 +12,9 @@ services:
       test: [ "CMD","ls" ]
     container_name: database-container
     environment:
-      MYSQL_PASSWORD: Taehyungieoppa@3012
+      MYSQL_ROOT_PASSWORD: Taehyungieoppa@3012
       MYSQL_DATABASE: betr
+      MYSQL_TCP_PORT: 3307
     ports:
       - "3307:3307"
     volumes:
