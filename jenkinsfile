@@ -28,7 +28,7 @@ pipeline {
                     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     sh 'docker push svp3012/betr-backend'
                     dir('Frontend') {
-                        sh 'docker build --build-arg REACT_APP_API_URL=https://api.example.com --build-arg REACT_APP_DEBUG=true -t svp3012/betr-frontend-app .'
+                        sh 'docker build --build-arg REACT_APP_API_URL=http://localhost:8081 --build-arg REACT_APP_DEBUG=true -t svp3012/betr-frontend-app .'
                         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                         sh 'docker push svp3012/betr-frontend-app'
                     }
