@@ -16,7 +16,7 @@
 # CMD ["java", "-jar", "BetrBackend-0.0.1-SNAPSHOT.jar"] 
 
 # Use an official OpenJDK runtime as a parent image
-FROM openjdk:11-jre-slim
+FROM openjdk:17-jdk-slim
 
 # Set the working directory inside the container
 WORKDIR /app
