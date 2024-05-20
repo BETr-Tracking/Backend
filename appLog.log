@@ -36,4 +36,23 @@
 -2024-05-20 13:26:13.964 - INFO 10699 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 -2024-05-20 13:26:13.967 - INFO 10699 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 -2024-05-20 13:26:13.975 - INFO 10699 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+-2024-05-20 14:34:52.720 - INFO 18980 --- [           main] c.e.b.BetrBackendApplicationTests        : Starting BetrBackendApplicationTests using Java 17.0.8.1 with PID 18980 (started by svp in /home/svp/Backend)
+-2024-05-20 14:34:52.722 - INFO 18980 --- [           main] c.e.b.BetrBackendApplicationTests        : No active profile set, falling back to 1 default profile: "default"
+-2024-05-20 14:34:53.302 - INFO 18980 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+-2024-05-20 14:34:53.385 - INFO 18980 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 72 ms. Found 5 JPA repository interfaces.
+-2024-05-20 14:34:53.814 - INFO 18980 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+-2024-05-20 14:34:53.881 - INFO 18980 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+-2024-05-20 14:34:53.931 - INFO 18980 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+-2024-05-20 14:34:54.214 - INFO 18980 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+-2024-05-20 14:34:54.233 - INFO 18980 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+-2024-05-20 14:34:54.511 - INFO 18980 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@d62472f
+-2024-05-20 14:34:54.513 - INFO 18980 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+-2024-05-20 14:34:55.316 - INFO 18980 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+-2024-05-20 14:34:55.408 - INFO 18980 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+-2024-05-20 14:34:55.651 - INFO 18980 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+-2024-05-20 14:34:56.315 - WARN 18980 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+-2024-05-20 14:34:56.649 - INFO 18980 --- [           main] c.e.b.BetrBackendApplicationTests        : Started BetrBackendApplicationTests in 4.194 seconds (process running for 5.021)
+-2024-05-20 14:34:57.162 - INFO 18980 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+-2024-05-20 14:34:57.164 - INFO 18980 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+-2024-05-20 14:34:57.177 - INFO 18980 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 -

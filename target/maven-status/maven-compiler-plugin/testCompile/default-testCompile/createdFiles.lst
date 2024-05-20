@@ -1,0 +1,6 @@
+com/example/betr_backend/Services/CategoryServiceTest.class
+com/example/betr_backend/Services/BudgetServiceTest.class
+com/example/betr_backend/BetrBackendApplicationTests.class
+com/example/betr_backend/Services/UserServiceTest.class
+com/example/betr_backend/Services/BudgetCategoryServiceTest.class
+com/example/betr_backend/Services/ExpenseServiceTest.class

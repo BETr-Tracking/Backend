@@ -7,16 +7,15 @@ volumes:
 services:
   mydb:
     image: mysql:latest
-    #    ports:
-    #      - "3308:3306"
+    restart: always
     healthcheck:
       test: [ "CMD","ls" ]
     container_name: database-container
     environment:
-      MYSQL_ROOT_PASSWORD: Taehyungieoppa@3012
+      MYSQL_ROOT_PASSWORD: 3012
       MYSQL_DATABASE: betr
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - database-volume:/var/lib/mysql
     networks:
