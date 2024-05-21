@@ -5,7 +5,7 @@ services:
       container_name: betr-backend
       # user: "svp"
       ports:
-        - "8081:8081"
+        - "8082:8081"
       environment:
         SPRING_DATASOURCE_URL: "jdbc:mysql://betrDB:3306/betr?createDatabaseIfNotExist=true"
         SPRING_DATASOURCE_USERNAME: "root"
