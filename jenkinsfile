@@ -40,8 +40,8 @@ pipeline {
                 script {
                     sh '''
                         # Stop any running containers of our project
-                        docker ps -q --filter "ancestor=svp3012/betr-backend" | xargs -r docker stop
-                        docker ps -q --filter "ancestor=svp3012/betr-frontend-app" | xargs -r docker stop
+                        docker ps -q --filter "betr-backend" | xargs -r docker stop
+                        docker ps -q --filter "betr-frontend-app" | xargs -r docker stop
 
                         # Remove all stopped containers
                         docker container prune -f
