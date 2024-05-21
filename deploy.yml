@@ -1,9 +1,10 @@
 ---
 - name: Deploy Docker Compose stack
   hosts: localhost
-  remote_user: svp
-  become: true
-
+  remote_user: SVP
+  become: false
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: Install Docker Compose
       apt:
