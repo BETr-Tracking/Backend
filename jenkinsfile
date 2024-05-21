@@ -39,9 +39,12 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        # Stop any running containers of our project
-                        docker ps -q --filter "betr-backend" | xargs -r docker stop
-                        docker ps -q --filter "betr-frontend-app" | xargs -r docker stop
+                        
+                        docker stop betr-backend || true
+                        docker stop betr-frontend-app || true
+                        
+                        docker rm betr-backend || true
+                        docker rm betr-frontend-app || true
 
                         # Remove all stopped containers
                         docker container prune -f
@@ -53,6 +56,7 @@ pipeline {
                         # Remove dangling images
                         docker images -f "dangling=true" -q | xargs -r docker rmi
                     '''
+
                 }
             }
         }
