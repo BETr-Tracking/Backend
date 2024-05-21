@@ -1,5 +1,5 @@
 localhost:
-  ansible_user: SVP
+  ansible_user: root
   ansible_ssh_pass: 3012
   ansible_sudo_pass: 3012
 
