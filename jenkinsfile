@@ -64,7 +64,8 @@ pipeline {
                                 export LANG=en_US.UTF-8
                                 export LANGUAGE=en_US:en
                                 export LC_ALL=en_US.UTF-8
-                                sudo ansible-playbook -i inventory deploy.yml
+                                echo '3012' | sudo -S ansible-playbook -i inventory deploy.yml
+
                             '''
                     }
                 }
