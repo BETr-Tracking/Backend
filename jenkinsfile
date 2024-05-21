@@ -18,6 +18,7 @@ pipeline {
         }
         stage('2. Maven Build') {
             steps {
+                sh 'sudo systemctl start mysql'
                 sh 'mvn clean install'
                 sh 'sudo systemctl stop mysql'
             }
