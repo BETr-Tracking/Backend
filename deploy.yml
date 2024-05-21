@@ -61,5 +61,5 @@
     - name: Ensure containers are running
       assert:
         that:
-          - docker_ps_output.stdout_lines | length >= 2  # Both containers are running
+          - docker_ps_output.stdout_lines | length > 2  
         msg: "One or more containers failed to start. Check logs for details."
