@@ -18,9 +18,11 @@ pipeline {
         }
         stage('2. Maven Build') {
             steps {
-                sh 'echo '3012' | sudo -S systemctl start mysql'
-                sh 'mvn clean install'
-                sh 'echo '3012' | sudo systemctl stop mysql'
+                sh '''
+                    echo '3012' | sudo -S systemctl start mysql'
+                    mvn clean install'
+                    echo '3012' | sudo systemctl stop mysql'
+                    '''
             }
         }
         stage('3. Build and Push Docker Images') {
