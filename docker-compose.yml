@@ -15,7 +15,7 @@ services:
       ports:
         - "8081:8081"
       environment:
-        SPRING_DATASOURCE_URL: "jdbc:mysql://mydb:3306/betr?createDatabaseIfNotExist=true"
+        SPRING_DATASOURCE_URL: "jdbc:mysql://172.23.0.2:3306/betr?createDatabaseIfNotExist=true"
         SPRING_DATASOURCE_USERNAME: "svp"
         SPRING_DATASOURCE_PASSWORD: "Taehyungieoppa@3012"
       volumes:
