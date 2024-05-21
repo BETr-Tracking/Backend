@@ -1,11 +1,4 @@
 version: '3.9'
-networks:
-  betr-network:
-    driver: bridge
-
-volumes:
-  betrDB:
-
 services:
   betr-backend:
       image: svp3012/betr-backend
@@ -54,3 +47,9 @@ services:
       - betr-network
     # depends_on:
     #   - betr-backend
+networks:
+  betr-network:
+    driver: bridge
+
+volumes:
+  betrDB:
