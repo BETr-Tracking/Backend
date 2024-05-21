@@ -1,6 +1,6 @@
 ---
 - name: Deploy Docker Compose stack
-  hosts: all
+  hosts: localhost
   become: false
 
   tasks:
