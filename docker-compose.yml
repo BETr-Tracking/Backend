@@ -35,8 +35,8 @@ services:
     networks:
       - betr-network
     depends_on:
-      - mydb
-        # condition: service_healthy
+      mydb:
+        condition: service_healthy
   betr-frontend:
     image: svp3012/betr-frontend-app
     container_name: betr-frontend-app
