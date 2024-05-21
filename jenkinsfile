@@ -19,6 +19,7 @@ pipeline {
         stage('2. Maven Build') {
             steps {
                 sh 'mvn clean install'
+                sh 'sudo systemctl stop mysql'
             }
         }
         stage('3. Build and Push Docker Images') {
