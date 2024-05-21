@@ -5,7 +5,6 @@ networks:
 
 volumes:
   betrDB:
-  logs:
 
 services:
   betr-backend:
@@ -16,16 +15,14 @@ services:
         - "8081:8081"
       environment:
         SPRING_DATASOURCE_URL: "jdbc:mysql://172.23.0.2:3306/betr?createDatabaseIfNotExist=true"
-        SPRING_DATASOURCE_USERNAME: "svp"
-        SPRING_DATASOURCE_PASSWORD: "Taehyungieoppa@3012"
-      volumes:
-        - logs:/logs
+        SPRING_DATASOURCE_USERNAME: "root"
+        SPRING_DATASOURCE_PASSWORD: "3012"
       networks:
         - betr-network
       depends_on:
-        - mydb
+        - betrDB
           # condition: service_healthy
-  mydb:
+  betrDB:
     # image: mysql:latest
     image: mysql:8
     # restart: always
