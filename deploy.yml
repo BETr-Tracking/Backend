@@ -1,6 +1,7 @@
 ---
 - name: Deploy Docker Compose stack
   hosts: localhost
+  remote_user: SVP
   become: false
 
   tasks:
