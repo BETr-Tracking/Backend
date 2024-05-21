@@ -41,7 +41,7 @@ services:
       # MYSQL_USER: "svp"
       # MYSQL_PASSWORD: "Taehyungieoppa@3012"
     ports:
-      - "3307:33060"
+      - "3307:3306"
     volumes:
       - betrDB:/var/lib/mysql
     networks:
