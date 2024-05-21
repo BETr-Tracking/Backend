@@ -1,6 +1,2 @@
-localhost:
-  ansible_user: root
-  ansible_ssh_pass: 3012
-  ansible_sudo_pass: 3012
-
-ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+[local]
+localhost ansible_user=svp ansible_ssh_pass=3012

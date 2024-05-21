@@ -1,50 +1,51 @@
 version: '3.9'
 networks:
   betr-network:
+    driver: bridge
 
 volumes:
-  database-volume:
+  betrDB:
   logs:
 
 services:
+  betr-backend:
+      image: svp3012/betr-backend
+      container_name: betr-backend
+      # user: "svp"
+      ports:
+        - "8081:8081"
+      environment:
+        SPRING_DATASOURCE_URL: "jdbc:mysql://mydb:3306/betr?createDatabaseIfNotExist=true"
+        SPRING_DATASOURCE_USERNAME: "svp"
+        SPRING_DATASOURCE_PASSWORD: "Taehyungieoppa@3012"
+      volumes:
+        - logs:/logs
+      networks:
+        - betr-network
+      depends_on:
+        - mydb
+          # condition: service_healthy
   mydb:
-    image: mysql:latest
-    restart: always
-    healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    container_name: database-container
+    # image: mysql:latest
+    image: mysql:8
+    # restart: always
+    # healthcheck:
+    #   test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
+    container_name: betrDB
     environment:
       MYSQL_ROOT_PASSWORD: "3012"
       MYSQL_DATABASE: "betr"
-      MYSQL_USER: "svp"
-      MYSQL_PASSWORD: "Taehyungieoppa@3012"
+      # MYSQL_USER: "svp"
+      # MYSQL_PASSWORD: "Taehyungieoppa@3012"
     ports:
-      - "3308:3306"
+      - "3307:3306"
     volumes:
-      - database-volume:/var/lib/mysql
+      - betrDB:/var/lib/mysql
     networks:
       - betr-network
-
-  betr-backend:
-    image: svp3012/betr-backend
-    container_name: betr-backend
-    user: "svp"
-    ports:
-      - "8081:8081"
-    environment:
-      MYSQL_URL: "jdbc:mysql://mydb:3306/betr?createDatabaseIfNotExist=true"
-      MYSQL_USERNAME: "svp"
-      MYSQL_PASSWORD: "Taehyungieoppa@3012"
-    volumes:
-      - logs:/logs
-    networks:
-      - betr-network
-    depends_on:
-      mydb:
-        condition: service_healthy
 
   betr-frontend:
     image: svp3012/betr-frontend-app
@@ -54,5 +55,5 @@ services:
       - "3000:3000"
     networks:
       - betr-network
-    depends_on:
-      - betr-backend
+    # depends_on:
+    #   - betr-backend
