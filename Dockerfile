@@ -30,10 +30,12 @@ RUN chown -R svp:svp /app
 USER svp
 
 # Copy the built JAR file from the build context into the container
-COPY target/BetrBackend-0.0.1-SNAPSHOT.jar /app/BetrBackend-0.0.1-SNAPSHOT.jar
+# COPY target/BetrBackend-0.0.1-SNAPSHOT.jar /app/BetrBackend-0.0.1-SNAPSHOT.jar
+COPY target/BetrBackend-0.0.1-SNAPSHOT.jar app.jar
+
+# Set the entry point to run the JAR file
+# ENTRYPOINT ["java", "-jar", "BetrBackend-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
 
 # Expose port 8081
 EXPOSE 8081
-
-# Set the entry point to run the JAR file
-ENTRYPOINT ["java", "-jar", "BetrBackend-0.0.1-SNAPSHOT.jar"]
