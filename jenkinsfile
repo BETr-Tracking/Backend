@@ -56,32 +56,22 @@ pipeline {
                 }
             }
         }
-        // stage('5. Run Ansible Playbook') {
-        //     steps {
-        //         script {
-        //             dir(''){
-        //                 sh '''
-        //                         export LANG=en_US.UTF-8
-        //                         export LANGUAGE=en_US:en
-        //                         export LC_ALL=en_US.UTF-8
-        //                         echo '3012' | sudo -S ansible-playbook -i inventory deploy.yml
-
-        //                     '''
-        //             }
-        //         }
-        //     }
-        // }
-        stage('5. Run Ansible Playbook'){
-            steps{
+        stage('5. Run Ansible Playbook') {
+            steps {
                 script {
-                    ansiblePlaybook(
-                        playbook: 'deploy.yml',
-                        inventory: 'inventory',
-                    )
+                    dir(''){
+                        sh '''
+                                export LANG=en_US.UTF-8
+                                export LANGUAGE=en_US:en
+                                export LC_ALL=en_US.UTF-8
+                                echo '3012' | sudo -S ansible-playbook -i inventory deploy.yml
+
+                            '''
+                    }
                 }
             }
         }
-    }
+       
     post {
             always {
                 sh 'docker logout'
