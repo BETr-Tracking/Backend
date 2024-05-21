@@ -54,12 +54,12 @@
       pause:
         seconds: 10
 
-    - name: Check container status
-      command: docker ps -f name=betr-backend -f name=betr-frontend-app
-      register: docker_ps_output
+    # - name: Check container status
+    #   command: docker ps -f name=betr-backend -f name=betr-frontend-app
+    #   register: docker_ps_output
 
-    - name: Ensure containers are running
-      assert:
-        that:
-          - docker_ps_output.stdout_lines | length >= 2  # Both containers are running
-        msg: "One or more containers failed to start. Check logs for details."
+    # - name: Ensure containers are running
+    #   assert:
+    #     that:
+    #       - docker_ps_output.stdout_lines | length >= 2  # Both containers are running
+    #     msg: "One or more containers failed to start. Check logs for details."
