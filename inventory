@@ -1,2 +1,2 @@
 [local]
-localhost ansible_user=svp ansible_ssh_pass=3012
+localhost ansible_user=svp
