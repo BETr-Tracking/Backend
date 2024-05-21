@@ -1,25 +1,33 @@
-# FROM ubuntu:latest
 
-# # Install Java
-# RUN apt-get update && \
-#     apt-get install -y default-jre && \
-#     apt-get clean; 
- 
-# # Set Java Home environment variable (optional)
-# ENV JAVA_HOME /usr/lib/jvm/java-1.11.0-openjdk-amd64
+# # Use an official OpenJDK runtime as a parent image
+# FROM openjdk:17-jdk-slim
 
-# COPY target/betr_backend-1.0-SNAPSHOT.jar /app/betr_backend-1.0-SNAPSHOT.jar
-# CMD sed -i 's/\r$//' /app/calculator.sh
+# # Set the working directory inside the container
+# WORKDIR /app
 
-# FROM openjdk
-# COPY ./target/BetrBackend-0.0.1-SNAPSHOT.jar ./
-# CMD ["java", "-jar", "BetrBackend-0.0.1-SNAPSHOT.jar"] 
+# # Copy the built JAR file from the build context into the container
+# COPY target/BetrBackend-0.0.1-SNAPSHOT.jar /app/BetrBackend-0.0.1-SNAPSHOT.jar
+
+# # Expose port 8081
+# EXPOSE 8081
+
+# # Set the entry point to run the JAR file
+# ENTRYPOINT ["java", "-jar", "BetrBackend-0.0.1-SNAPSHOT.jar"]
 
 # Use an official OpenJDK runtime as a parent image
 FROM openjdk:17-jdk-slim
 
+# Create a non-root user and group named svp
+RUN groupadd -r svp && useradd -r -g svp svp
+
 # Set the working directory inside the container
 WORKDIR /app
+
+# Change ownership of the /app directory to svp
+RUN chown -R svp:svp /app
+
+# Switch to the svp user
+USER svp
 
 # Copy the built JAR file from the build context into the container
 COPY target/BetrBackend-0.0.1-SNAPSHOT.jar /app/BetrBackend-0.0.1-SNAPSHOT.jar
@@ -29,4 +37,3 @@ EXPOSE 8081
 
 # Set the entry point to run the JAR file
 ENTRYPOINT ["java", "-jar", "BetrBackend-0.0.1-SNAPSHOT.jar"]
-

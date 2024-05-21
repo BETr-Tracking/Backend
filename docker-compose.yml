@@ -9,14 +9,18 @@ services:
     image: mysql:latest
     restart: always
     healthcheck:
-      test: [ "CMD","ls" ]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     container_name: database-container
     environment:
-      MYSQL_ROOT_PASSWORD: Taehyungieoppa@3012
-      MYSQL_DATABASE: betr
-      # MYSQL_TCP_PORT: 3307
+      - MYSQL_ROOT_PASSWORD: 3012
+      - MYSQL_DATABASE: betr
+      - MYSQL_USER: svp
+      - MYSQL_PASSWORD: Taehyungieoppa@3012
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - database-volume:/var/lib/mysql
     networks:
@@ -24,6 +28,7 @@ services:
   betr-backend:
     image: svp3012/betr-backend
     container_name: betr-backend
+    user: "svp"
     ports:
       - "8081:8081"
     environment:
