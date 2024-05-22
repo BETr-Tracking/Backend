@@ -79,7 +79,7 @@ services:
     restart: always
     volumes:
       - ./ELK/logstash/config/logstash.yml:/usr/share/ELK/logstash/config/logstash.yml:ro
-      - ./ELK/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:re
+      - ./ELK/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
     environment:
       LS_JAVA_OPTS: "-Xmx512m -Xms512m"
     ports:
