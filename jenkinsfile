@@ -85,15 +85,7 @@ pipeline {
                 }
             }
         }
-        stage('6. ELK'){
-            steps{
-                script{
-                    dir('Backend/ELK'){
-                        sh 'elk-docker-compose up -d'
-                    }
-                }
-            }
-        }
+        
     }   
     post {
             always {
