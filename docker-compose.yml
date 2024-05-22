@@ -1,20 +1,20 @@
 version: '3.9'
 services:
   betr-backend:
-      image: svp3012/betr-backend
-      container_name: betr-backend
-      ports:
-        - "8082:8081"
-      environment:
-        SPRING_DATASOURCE_URL: "jdbc:mysql://betrDB:3306/betr?createDatabaseIfNotExist=true"
-        # SPRING_DATASOURCE_USERNAME: "root"
-        # SPRING_DATASOURCE_PASSWORD: "3012"
-        SPRING_DATASOURCE_USERNAME: "svp"
-        SPRING_DATASOURCE_PASSWORD: "Taehyungieoppa@3012"
-      networks:
-        - betr-network
-      depends_on:
-        - betrDB
+     image: svp3012/betr-backend
+    container_name: betr-backend
+    ports:
+      - "8082:8081"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://betrDB:3306/betr?createDatabaseIfNotExist=true"
+      # SPRING_DATASOURCE_USERNAME: "root"
+      # SPRING_DATASOURCE_PASSWORD: "3012"
+      SPRING_DATASOURCE_USERNAME: "svp"
+      SPRING_DATASOURCE_PASSWORD: "Taehyungieoppa@3012"
+    networks:
+      - betr-network
+    depends_on:
+      - betrDB
 
   betrDB:
     image: mysql:8
@@ -58,7 +58,6 @@ services:
     volumes:
       - elastic_data:/usr/share/esearch/data
       - ./ELK/esearch/config/esearch.yml:/usr/share/ELK/esearch/config/esearch.yml
-
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.3.3
