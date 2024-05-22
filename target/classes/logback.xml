@@ -7,7 +7,7 @@
     </appender>
 
     <appender name="SAVE-TO-FILE" class="ch.qos.logback.core.FileAppender">
-        <file>.../ELK/BETr.log</file>
+        <file>../ELK/BETr.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
