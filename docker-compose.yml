@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   betr-backend:
     image: svp3012/betr-backend
