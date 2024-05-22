@@ -42,9 +42,15 @@ pipeline {
                         
                         docker stop betr-backend || true
                         docker stop betr-frontend-app || true
+                        docker stop logstash  || true
+                        docker stop kibana || true
+                        docker stop elasticsearch || true
                         
                         docker rm betr-backend || true
                         docker rm betr-frontend-app || true
+                        docker rm logstash  || true
+                        docker rm kibana || true
+                        docker rm elasticsearch || true
 
                         # Remove all stopped containers
                         docker container prune -f
@@ -52,6 +58,10 @@ pipeline {
                         # Remove images matching the project name, excluding the ones with tags
                         docker images -q svp3012/betr-backend | xargs -r docker rmi -f
                         docker images -q svp3012/betr-frontend-app | xargs -r docker rmi -f
+                        docker images -q docker.elastic.co/elasticsearch/elasticsearch | xargs -r docker rmi -f
+                        docker images -q docker.elastic.co/logstash/logstash | xargs -r docker rmi -f
+                        docker images -q docker.elastic.co/kibana/kibana  | xargs -r docker rmi -f
+
 
                         # Remove dangling images
                         docker images -f "dangling=true" -q | xargs -r docker rmi
@@ -71,6 +81,15 @@ pipeline {
                                 echo '3012' | sudo -S ansible-playbook -i inventory deploy.yml
 
                             '''
+                    }
+                }
+            }
+        }
+        stage('6. ELK'){
+            steps{
+                script{
+                    dir('Backend/ELK'){
+                        sh 'docker-compose up -d'
                     }
                 }
             }
