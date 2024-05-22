@@ -30,6 +30,7 @@ services:
       - betrDB:/var/lib/mysql
     networks:
       - betr-network
+    restart: always
 
   betr-frontend:
     image: svp3012/betr-frontend-app
