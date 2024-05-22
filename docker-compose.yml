@@ -57,7 +57,7 @@ services:
       - betr-network
     volumes:
       - elastic_data:/usr/share/elasticsearch/data
-      - ./ELK/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./ELK/esearch/config/esearch.yml:/usr/share/ELK/ecsearch/config/esearch.yml
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.3.3
@@ -78,8 +78,8 @@ services:
     container_name: logstash
     restart: always
     volumes:
-      - ./ELK/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./ELK/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      - ./ELK/logstash/config/logstash.yml:/usr/share/ELK/logstash/config/logstash.yml:ro
+      - ./ELK/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:re
     environment:
       LS_JAVA_OPTS: "-Xmx512m -Xms512m"
     ports:
