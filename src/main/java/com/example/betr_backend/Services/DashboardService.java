@@ -25,8 +25,8 @@ public class DashboardService {
     @Autowired
     private BudgetCategoryService bcs;
 
-    public DashboardModel DashboardDetails(IdMonthYearModel imy) {
-        long bid = bs.getBudgetId(imy.getUid(), imy.getMonth(), imy.getYear());
+    public DashboardModel DashboardDetails(long uid, int month, int year) {
+        long bid = bs.getBudgetId(uid, month, year);
 
         if (bid > 0) {
             List<BudgetCategory> budcats = bcs.getCategoriesOfBudget_BC(bid);
@@ -58,7 +58,7 @@ public class DashboardService {
             }
 
             dashboard.setClms(categoryDetailsList);
-            dashboard.setExpenses(es.findRecentTrans(imy.getUid()));
+            dashboard.setExpenses(es.findRecentTrans(uid));
 
             return dashboard;
         } else {

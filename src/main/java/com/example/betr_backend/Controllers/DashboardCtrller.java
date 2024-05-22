@@ -15,8 +15,8 @@ public class DashboardCtrller {
     private DashboardService ds;
 
     @GetMapping("/getDashboardDetails")
-    public ResponseEntity<DashboardModel> getDashboardDetails(@RequestBody IdMonthYearModel imy){
-        DashboardModel dbm = ds.DashboardDetails(imy);
+    public ResponseEntity<DashboardModel> getDashboardDetails(@RequestParam long uid, @RequestParam int month, @RequestParam int year){
+        DashboardModel dbm = ds.DashboardDetails(uid, month, year);
         return ResponseEntity.ok(dbm);
     }
 }
