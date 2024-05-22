@@ -89,7 +89,7 @@ pipeline {
             steps{
                 script{
                     dir('Backend/ELK'){
-                        sh 'docker-compose up -d'
+                        sh 'elk-docker-compose up -d'
                     }
                 }
             }
