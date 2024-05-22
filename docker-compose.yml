@@ -45,7 +45,7 @@ services:
     container_name: elasticsearch
     restart: always
     environment:
-      - bootstrap_memory_lock = true
+      - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - xpack.security.enabled=false
       - discovery.type=single-node
@@ -54,10 +54,10 @@ services:
     ports:
       - "9200:9200"
     networks:
-      - betr_network
+      - betr-network
     volumes:
-      - elastic_data:/usr/share/esearch/data
-      - ./ELK/esearch/config/esearch.yml:/usr/share/ELK/esearch/config/esearch.yml
+      - elastic_data:/usr/share/elasticsearch/data
+      - ./ELK/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.3.3
@@ -69,7 +69,7 @@ services:
     ports:
       - "5601:5601"
     networks:
-      - betr_network
+      - betr-network
     depends_on:
       - elasticsearch
 
@@ -79,7 +79,7 @@ services:
     restart: always
     volumes:
       - ./ELK/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./ELK/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:re
+      - ./ELK/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
     environment:
       LS_JAVA_OPTS: "-Xmx512m -Xms512m"
     ports:
@@ -87,7 +87,7 @@ services:
       - "5001:5001/udp"
       - "9600:9600"
     networks:
-      - betr_network
+      - betr-network
     depends_on:
       - elasticsearch
 
