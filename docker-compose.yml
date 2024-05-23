@@ -171,8 +171,8 @@ services:
       - "9600:9600"
     networks:
       - betr-network
-    depends_on:
-      - elasticsearch
+    # depends_on:
+    #   - elasticsearch
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.3.3
