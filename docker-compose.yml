@@ -156,21 +156,7 @@ services:
       - elastic_data:/usr/share/elasticsearch/data
       - ./ELK/esearch/config/esearch.yml:/usr/share/ELK/esearch/config/esearch.yml
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.3.3
-    container_name: kibana
-    restart: always
-    environment:
-      ELASTICSEARCH_URL: http://elasticsearch:9200
-      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
-    ports:
-      - "5601:5601"
-    networks:
-      - betr-network
-    depends_on:
-      - elasticsearch
-
-  logstash:
+    logstash:
     image: docker.elastic.co/logstash/logstash:8.3.3
     container_name: logstash
     restart: always
@@ -183,6 +169,20 @@ services:
       - "5001:5001/tcp"
       - "5001:5001/udp"
       - "9600:9600"
+    networks:
+      - betr-network
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.3.3
+    container_name: kibana
+    restart: always
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+    ports:
+      - "5601:5601"
     networks:
       - betr-network
     depends_on:
