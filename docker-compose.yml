@@ -156,7 +156,7 @@ services:
       - elastic_data:/usr/share/elasticsearch/data
       - ./ELK/esearch/config/esearch.yml:/usr/share/ELK/esearch/config/esearch.yml
 
-    logstash:
+  logstash:
     image: docker.elastic.co/logstash/logstash:8.3.3
     container_name: logstash
     restart: always
