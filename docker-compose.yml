@@ -100,20 +100,6 @@
 version: "3.9"
 
 services:
-  betr-backend:
-    image: svp3012/betr-backend
-    container_name: betr-backend
-    ports:
-      - "8082:8081"
-    environment:
-      SPRING_DATASOURCE_URL: "jdbc:mysql://betrDB:3306/betr?createDatabaseIfNotExist=true"
-      SPRING_DATASOURCE_USERNAME: "root"
-      SPRING_DATASOURCE_PASSWORD: "3012"
-    networks:
-      - betr-network
-    depends_on:
-      - betrDB
-
   betrDB:
     image: mysql:8
     container_name: betrDB
@@ -128,6 +114,20 @@ services:
       - betr-network
     restart: always
 
+  betr-backend:
+    image: svp3012/betr-backend
+    container_name: betr-backend
+    ports:
+      - "8082:8081"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://betrDB:3306/betr?createDatabaseIfNotExist=true"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "3012"
+    networks:
+      - betr-network
+    depends_on:
+      - betrDB
+
   betr-frontend:
     image: svp3012/betr-frontend-app
     container_name: betr-frontend-app
@@ -137,57 +137,57 @@ services:
     networks:
       - betr-network
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
-    container_name: elasticsearch
-    # restart: always
-    environment:
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - xpack.security.enabled=false
-      - discovery.type=single-node
-      - network.host=0.0.0.0
-      - http.port=9200
-    ports:
-      - "9200:9200"
-    networks:
-      - betr-network
-    volumes:
-      - elastic_data:/usr/share/elasticsearch/data
-      - ./ELK/esearch/config/esearch.yml:/usr/share/ELK/esearch/config/esearch.yml
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+  #   container_name: elasticsearch
+  #   # restart: always
+  #   environment:
+  #     - bootstrap.memory_lock=true
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #     - xpack.security.enabled=false
+  #     - discovery.type=single-node
+  #     - network.host=0.0.0.0
+  #     - http.port=9200
+  #   ports:
+  #     - "9200:9200"
+  #   networks:
+  #     - betr-network
+  #   volumes:
+  #     - elastic_data:/usr/share/elasticsearch/data
+  #     - ./ELK/esearch/config/esearch.yml:/usr/share/ELK/esearch/config/esearch.yml
 
 
-  logstash:
-    image: docker.elastic.co/logstash/logstash:8.3.3
-    container_name: logstash
-    # restart: always
-    volumes:
-      - ./ELK/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./ELK/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
-    environment:
-      LS_JAVA_OPTS: "-Xmx512m -Xms512m"
-    ports:
-      - "5001:5001/tcp"
-      - "5001:5001/udp"
-      - "9600:9600"
-    networks:
-      - betr-network
-    depends_on:
-      - elasticsearch
+  # logstash:
+  #   image: docker.elastic.co/logstash/logstash:8.3.3
+  #   container_name: logstash
+  #   # restart: always
+  #   volumes:
+  #     - ./ELK/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+  #     - ./ELK/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+  #   environment:
+  #     LS_JAVA_OPTS: "-Xmx512m -Xms512m"
+  #   ports:
+  #     - "5001:5001/tcp"
+  #     - "5001:5001/udp"
+  #     - "9600:9600"
+  #   networks:
+  #     - betr-network
+  #   depends_on:
+  #     - elasticsearch
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.3.3
-    container_name: kibana
-    # restart: always
-    environment:
-      ELASTICSEARCH_URL: http://elasticsearch:9200
-      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
-    ports:
-      - "5601:5601"
-    networks:
-      - betr-network
-    depends_on:
-      - elasticsearch
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:8.3.3
+  #   container_name: kibana
+  #   # restart: always
+  #   environment:
+  #     ELASTICSEARCH_URL: http://elasticsearch:9200
+  #     ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+  #   ports:
+  #     - "5601:5601"
+  #   networks:
+  #     - betr-network
+  #   depends_on:
+  #     - elasticsearch
 
 networks:
   betr-network:
