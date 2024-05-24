@@ -99,4 +99,4 @@ networks:
 volumes:
   betrDB:
   elastic_data: 
-    - local
+    driver: local
