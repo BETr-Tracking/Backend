@@ -207,10 +207,10 @@ services:
         - "8082:8081"
       environment:
         SPRING_DATASOURCE_URL: "jdbc:mysql://betrDB:3306/betr?createDatabaseIfNotExist=true"
-        # SPRING_DATASOURCE_USERNAME: "root"
-        # SPRING_DATASOURCE_PASSWORD: "3012"
-        SPRING_DATASOURCE_USERNAME: "svp"
-        SPRING_DATASOURCE_PASSWORD: "Taehyungieoppa@3012"
+        SPRING_DATASOURCE_USERNAME: "root"
+        SPRING_DATASOURCE_PASSWORD: "3012"
+        # SPRING_DATASOURCE_USERNAME: "svp"
+        # SPRING_DATASOURCE_PASSWORD: "Taehyungieoppa@3012"
       networks:
         - betr-network
       depends_on:
