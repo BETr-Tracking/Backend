@@ -98,4 +98,5 @@ networks:
 
 volumes:
   betrDB:
-  elastic_data: local
+  elastic_data: 
+    - local
