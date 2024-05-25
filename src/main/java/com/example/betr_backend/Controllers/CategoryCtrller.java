@@ -1,5 +1,6 @@
 package com.example.betr_backend.Controllers;
 
+import com.example.betr_backend.Entities.BudgetCategory;
 import com.example.betr_backend.Entities.Category;
 import com.example.betr_backend.Models.CategoryModels.CreateCategoryModel;
 import com.example.betr_backend.Models.CategoryModels.MonthYearModel;
@@ -28,8 +29,8 @@ public class CategoryCtrller {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
     @GetMapping("/getCategoriesOfBudget/{bid}")
-    public ResponseEntity<List<Category>> getCategoriesOfBudget(@PathVariable long bid){
-        List<Category> budgetcats = bcs.getCategoriesOfBudget(bid);
+    public ResponseEntity<List<BudgetCategory>> getCategoriesOfBudget_BC(@PathVariable long bid){
+        List<BudgetCategory> budgetcats = bcs.getCategoriesOfBudget_BC(bid);
         return ResponseEntity.ok(budgetcats);
     }
     @GetMapping("/getCategoriesOfUser/{uid}")
